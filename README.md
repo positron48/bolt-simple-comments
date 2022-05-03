@@ -1,13 +1,13 @@
-# Acme ReferenceExtension
+# Positron48 CommentExtension
 
-Author: YourNameHere
+Author: Anton Filatov
 
-This Bolt extension can be used as a starting point to base your own extensions on.
+This Bolt extension can be used as comment system.
 
 Installation:
 
 ```bash
-composer require acmecorp/reference-extension
+composer require positron48/comment-extension
 ```
 
 

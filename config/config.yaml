@@ -1,3 +1,6 @@
-# Reference extension configuration file
-
-foo: Bar
+# Manages where Prism script will be loaded.
+zones:
+  # Load on front end pages. Defaults to true.
+  frontend: true
+  # Load on back end/admin pages. Defaults to false.
+  backend: false

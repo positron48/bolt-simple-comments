@@ -1,30 +1,28 @@
 {
-    "name": "acmecorp/reference-extension",
-    "description": "📦 This Bolt extension can be used as a starting point to base your own extensions on.",
+    "name": "positron48/bolt-simple-comments",
+    "description": "It is bolt extension for simple comments system.",
     "type": "bolt-extension",
     "license": "MIT",
     "authors": [
         {
-            "name": "YourNameHere",
-            "email": "youremail@acme.com"
+            "name": "Anton Filatov",
+            "email": "positron48@gmail.com"
         }
     ],
     "require": {
-        "php": ">=7.2.9",
-        "twig/twig": "^2.12 | ^3.0"
+        "php": ">=7.1.3"
     },
     "require-dev": {
-        "bolt/core": "^4.1",
-        "symplify/easy-coding-standard": "^8.3"
+        "bolt/core": "^4.0 | ^5.0"
     },
     "autoload": {
         "psr-4": {
-            "AcmeCorp\\ReferenceExtension\\": "src/"
+            "Positron48\\CommentExtension\\": "src/"
         }
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
     "extra": {
-        "entrypoint": "AcmeCorp\\ReferenceExtension\\Extension"
+        "entrypoint": "Positron48\\CommentExtension\\Extension"
     }
 }
