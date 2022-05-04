@@ -8,6 +8,6 @@ doctrine:
       Comment:
         is_bundle: false
         type: annotation
-        dir: '%kernel.project_dir%/vendor/positron48/bolt-simple-comments/src/Entity/Comment'
-        prefix: 'Positron48\CommentExtension\Entity\Comment'
+        dir: '%kernel.project_dir%/vendor/positron48/bolt-simple-comments/src/Entity'
+        prefix: 'Positron48\Comment'
         alias: Comment
