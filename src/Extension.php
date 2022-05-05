@@ -28,4 +28,9 @@ class Extension extends BaseExtension
         $filesystem = new Filesystem();
         $filesystem->mirror($source, $destination);
     }
+
+    public function initialize($cli = false): void
+    {
+        $this->addTwigNamespace('bolt-simple-comments');
+    }
 }

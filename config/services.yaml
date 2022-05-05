@@ -11,3 +11,9 @@ doctrine:
         dir: '%kernel.project_dir%/vendor/positron48/bolt-simple-comments/src/Entity'
         prefix: 'Positron48\Comment'
         alias: Comment
+
+services:
+  Positron48\CommentExtension\AdminMenu:
+    class: \Positron48\CommentExtension\AdminMenu
+    arguments: [ '@Symfony\Component\Routing\Generator\UrlGeneratorInterface' ]
+    tags: [ 'bolt.extension_backend_menu' ]
