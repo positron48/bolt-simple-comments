@@ -1,9 +1,82 @@
 {% extends '@bolt/_base/layout.html.twig' %}
 
 {% block title %}
-    This is the title of the page
+    {{ title }}
 {% endblock %}
 
 {% block main %}
-    <p>This is the content for a user. It is currently empty.</p>
+    {{ dump() }}
+
+    {% if comments|length %}
+
+        {% for comment in comments %}
+
+            <div class="listing__records">
+               <div>
+                   <span>
+                       <div class="listing--container">
+                           <div class="listing--checkbox">
+                               <div class="custom-control custom-checkbox">
+                                   <input id="row-15" type="checkbox" class="custom-control-input">
+                                   <label for="row-15" class="custom-control-label"></label>
+                               </div>
+                           </div>
+                           <div class="listing__row is-normal">
+                               <div class="listing__row--item is-details">
+                                   <a href="/bolt/edit/15" title="setting-up-web-server-on-wsl-2" class="listing__row--item-title"> Поднимаем web-server под WSL 2 </a>
+                                   <br>
+                                   <span class="listing__row--item-title-excerpt">
+                                       {{ comment.message }}
+                                   </span>
+                               </div>
+                               <div class="listing__row--item is-meta">
+                                   <ul class="listing__row--list">
+                                       <li class="text-nowrap">
+                                           <span title="published" class="status is-published"></span> 22.12.2021
+                                       </li>
+                                       <li>
+                                           <i class="fas fa-user"></i> {{ comment.authorName }}
+                                       </li>
+                                       <li>
+                                           <i class="fas fa-file-alt"></i> {{ comment.authorEmail }}
+                                       </li>
+                                   </ul>
+                               </div>
+                               <div class="listing__row--item is-excerpt">
+                                   <span>
+                                       {{ comment.message }}
+                                   </span>
+                               </div>
+                               <div class="listing__row--item is-actions edit-actions" size="normal">
+                                   <div class="btn-group">
+                                       <a href="/bolt/edit/15" data-patience="virtue" class="btn btn-secondary btn-block btn-sm text-nowrap">
+                                           <i class="far fa-edit mr-1"></i> Редактировать </a>
+                                       <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-sm btn-secondary edit-actions__dropdown-toggler dropdown-toggle dropdown-toggle-split">
+                                           <span class="sr-only">Toggle Dropdown</span>
+                                       </button>
+                                       <div class="edit-actions__dropdown dropdown-menu dropdown-menu-right" style="width: 320px;">
+                                           <a href="/post/setting-up-web-server-on-wsl-2" target="_blank" class="dropdown-item">
+                                               <i class="fas fa-w fa-external-link-square-alt"></i> Просмотр на сайте
+                                           </a>
+                                           <span class="dropdown-item-text">
+                                               <i class="fas fa-redo fa-w"></i> Изменен: <strong>11 янв. 2022 г., 00:16</strong>
+                                           </span>
+                                       </div>
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
+                   </span>
+               </div>
+           </div>
+        {% endfor %}
+
+        {{ pagerfanta(comments) }}
+
+    {% else %}
+
+        <p>No comments yet.</p>
+
+    {% endif %}
+
 {% endblock %}

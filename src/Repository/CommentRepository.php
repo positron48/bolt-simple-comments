@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Positron48\CommentExtension\Repository;
 
+use Bolt\Storage\Query;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
@@ -17,8 +18,14 @@ use Positron48\CommentExtension\Entity\Comment;
  */
 class CommentRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    /**
+     * @var Query
+     */
+    protected $query;
+
+    public function __construct(ManagerRegistry $registry, Query $query)
     {
+        $this->query = $query;
         parent::__construct($registry, Comment::class);
     }
 
@@ -28,20 +35,36 @@ class CommentRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param int $contentId
      * @return int|mixed[]|string
      */
     public function findByContentId(int $contentId)
     {
+        return $this->getByContentIdQuery($contentId)
+            ->getArrayResult();
+    }
+
+    /**
+     * @param int $contentId
+     * @return \Doctrine\ORM\Query
+     */
+    public function getByContentIdQuery(int $contentId)
+    {
         $qb = $this->getQueryBuilder();
-        $connection = $qb->getEntityManager()->getConnection();
 
         $query = $qb
             ->andWhere('content_id = :value')
             ->setParameter('value', $contentId);
 
         return $query
-            ->getQuery()
-            ->getArrayResult();
+            ->getQuery();
+    }
+
+    /**
+     * @return \Doctrine\ORM\Query
+     */
+    public function getAllQuery()
+    {
+        $qb = $this->getQueryBuilder();
+        return $qb->getQuery();
     }
 }
