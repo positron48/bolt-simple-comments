@@ -10,7 +10,7 @@
     {% if comments|length %}
 
         {% for comment in comments %}
-
+            {{ dump(comment) }}
             <div class="listing__records">
                <div>
                    <span>
@@ -23,7 +23,9 @@
                            </div>
                            <div class="listing__row is-normal">
                                <div class="listing__row--item is-details">
-                                   <a href="/bolt/edit/15" title="setting-up-web-server-on-wsl-2" class="listing__row--item-title"> Поднимаем web-server под WSL 2 </a>
+                                   <a href="/bolt/edit/{{ comment.contentId }}" title="setting-up-web-server-on-wsl-2" class="listing__row--item-title">
+                                        {% if comment.value[0] %}{{ comment.value[0] }}{% endif %} ({{ comment.contentType }}) [{{ comment.contentId }}]
+                                   </a>
                                    <br>
                                    <span class="listing__row--item-title-excerpt">
                                        {{ comment.message }}

@@ -21,7 +21,7 @@ class AdminController extends ExtensionController
      */
     public function index(CommentRepository $commentRepository, Request $request): Response
     {
-        $adapter = new QueryAdapter($commentRepository->getAllQuery());
+        $adapter = new QueryAdapter($commentRepository->getAllQuery(), false);
         $comments = new Pagerfanta($adapter);
 
         $page = (int) $request->get('page');
@@ -30,7 +30,7 @@ class AdminController extends ExtensionController
         }
 
         $context = [
-            'title' => 'Positron48 Comment Extension',
+            'title' => 'Comments',
             'comments' => $comments
         ];
 

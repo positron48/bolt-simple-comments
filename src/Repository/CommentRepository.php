@@ -6,6 +6,7 @@ namespace Positron48\CommentExtension\Repository;
 
 use Bolt\Storage\Query;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 use Positron48\CommentExtension\Entity\Comment;
@@ -65,6 +66,25 @@ class CommentRepository extends ServiceEntityRepository
     public function getAllQuery()
     {
         $qb = $this->getQueryBuilder();
+
+        $qb = $qb
+            ->select(
+                [
+                    'comment',
+                    'comment.id',
+                    'comment.authorName',
+                    'comment.authorEmail',
+                    'comment.message',
+                    'comment.contentId',
+                    't.value',
+                    'c.contentType'
+                ]
+            )
+            ->join('Bolt\Entity\Content', 'c', Join::WITH, 'comment.contentId = c.id')
+            ->join('Bolt\Entity\Field', 'f', Join::WITH, 'comment.contentId = f.content')
+            ->join('Bolt\Entity\FieldTranslation', 't', Join::WITH, 'f.id = t.translatable and f.name = \'title\'')
+        ;
+
         return $qb->getQuery();
     }
 }
