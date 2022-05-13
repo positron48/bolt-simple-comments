@@ -5,12 +5,10 @@
 {% endblock %}
 
 {% block main %}
-    {{ dump() }}
 
     {% if comments|length %}
 
         {% for comment in comments %}
-            {{ dump(comment) }}
             <div class="listing__records">
                <div>
                    <span>
@@ -23,12 +21,12 @@
                            </div>
                            <div class="listing__row is-normal">
                                <div class="listing__row--item is-details">
-                                   <a href="/bolt/edit/{{ comment.contentId }}" title="setting-up-web-server-on-wsl-2" class="listing__row--item-title">
-                                        {% if comment.value[0] %}{{ comment.value[0] }}{% endif %} ({{ comment.contentType }}) [{{ comment.contentId }}]
+                                   <a href="/bolt/edit/{{ comment.content.id }}" title="setting-up-web-server-on-wsl-2" class="listing__row--item-title">
+                                        {{ comment.content.contentType }} [{{ comment.content.id }}]
                                    </a>
                                    <br>
                                    <span class="listing__row--item-title-excerpt">
-                                       {{ comment.message }}
+                                       [{{ comment.id }}] {{ comment.message }}
                                    </span>
                                </div>
                                <div class="listing__row--item is-meta">
@@ -51,7 +49,7 @@
                                </div>
                                <div class="listing__row--item is-actions edit-actions" size="normal">
                                    <div class="btn-group">
-                                       <a href="/bolt/edit/15" data-patience="virtue" class="btn btn-secondary btn-block btn-sm text-nowrap">
+                                       <a href="/bolt/edit/{{ comment.content.id }}" data-patience="virtue" class="btn btn-secondary btn-block btn-sm text-nowrap">
                                            <i class="far fa-edit mr-1"></i> Редактировать </a>
                                        <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-sm btn-secondary edit-actions__dropdown-toggler dropdown-toggle dropdown-toggle-split">
                                            <span class="sr-only">Toggle Dropdown</span>
@@ -61,7 +59,7 @@
                                                <i class="fas fa-w fa-external-link-square-alt"></i> Просмотр на сайте
                                            </a>
                                            <span class="dropdown-item-text">
-                                               <i class="fas fa-redo fa-w"></i> Изменен: <strong>11 янв. 2022 г., 00:16</strong>
+                                               <i class="fas fa-redo fa-w"></i> Какая-то информация
                                            </span>
                                        </div>
                                    </div>

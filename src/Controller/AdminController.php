@@ -23,6 +23,7 @@ class AdminController extends ExtensionController
     {
         $adapter = new QueryAdapter($commentRepository->getAllQuery(), false);
         $comments = new Pagerfanta($adapter);
+        $comments->setMaxPerPage(10);
 
         $page = (int) $request->get('page');
         if($page > 0 && $page <= $comments->getNbPages()) {

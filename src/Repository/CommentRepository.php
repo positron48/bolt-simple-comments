@@ -67,23 +67,23 @@ class CommentRepository extends ServiceEntityRepository
     {
         $qb = $this->getQueryBuilder();
 
-        $qb = $qb
-            ->select(
-                [
-                    'comment',
-                    'comment.id',
-                    'comment.authorName',
-                    'comment.authorEmail',
-                    'comment.message',
-                    'comment.contentId',
-                    't.value',
-                    'c.contentType'
-                ]
-            )
-            ->join('Bolt\Entity\Content', 'c', Join::WITH, 'comment.contentId = c.id')
-            ->join('Bolt\Entity\Field', 'f', Join::WITH, 'comment.contentId = f.content')
-            ->join('Bolt\Entity\FieldTranslation', 't', Join::WITH, 'f.id = t.translatable and f.name = \'title\'')
-        ;
+//        $qb = $qb
+//            ->select(
+//                [
+//                    'comment',
+//                    'comment.id',
+//                    'comment.authorName',
+//                    'comment.authorEmail',
+//                    'comment.message',
+//                    'comment.contentId',
+//                    't.value',
+//                    'c.contentType'
+//                ]
+//            )
+//            ->join('Bolt\Entity\Content', 'c', Join::WITH, 'comment.contentId = c.id')
+//            ->join('Bolt\Entity\Field', 'f', Join::WITH, 'comment.contentId = f.content')
+//            ->join('Bolt\Entity\FieldTranslation', 't', Join::WITH, 'f.id = t.translatable and f.name = \'title\'')
+//        ;
 
         return $qb->getQuery();
     }

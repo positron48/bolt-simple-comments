@@ -4,6 +4,7 @@
 namespace Positron48\CommentExtension\Entity;
 
 
+use Bolt\Entity\Content;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -46,11 +47,13 @@ class Comment
     protected $message;
 
     /**
-     * @var int
+     * @var Content
+     *
      * @Assert\NotBlank()
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity="Bolt\Entity\Content", fetch="EAGER")
+     * @ORM\JoinColumn(nullable=false)
      */
-    protected $contentId;
+    protected $content;
 
     /**
      * @return int
@@ -117,17 +120,17 @@ class Comment
     }
 
     /**
-     * @return int
+     * @return Content
      */
-    public function getContentId(): int
+    public function getContent(): Content
     {
-        return $this->contentId;
+        return $this->content;
     }
 
     /**
-     * @param int $contentId
+     * @param Content $contentId
      */
-    public function setContentId(int $contentId): void
+    public function setContent(Content $contentId): void
     {
         $this->contentId = $contentId;
     }
