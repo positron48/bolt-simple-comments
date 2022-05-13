@@ -8,17 +8,17 @@
 
     {% if comments|length %}
 
-        {% for comment in comments %}
-            <div class="listing__records">
+        <div class="listing__records">
+            {% for comment in comments %}
                <div>
                    <span>
                        <div class="listing--container">
-                           <div class="listing--checkbox">
-                               <div class="custom-control custom-checkbox">
-                                   <input id="row-15" type="checkbox" class="custom-control-input">
-                                   <label for="row-15" class="custom-control-label"></label>
-                               </div>
-                           </div>
+{#                           <div class="listing--checkbox">#}
+{#                               <div class="custom-control custom-checkbox">#}
+{#                                   <input id="row-15" type="checkbox" class="custom-control-input">#}
+{#                                   <label for="row-15" class="custom-control-label"></label>#}
+{#                               </div>#}
+{#                           </div>#}
                            <div class="listing__row is-normal">
                                <div class="listing__row--item is-details">
                                    <a href="/bolt/edit/{{ comment.content.id }}" title="setting-up-web-server-on-wsl-2" class="listing__row--item-title">
@@ -68,9 +68,9 @@
                        </div>
                    </span>
                </div>
-           </div>
-        {% endfor %}
+            {% endfor %}
 
+        </div>
         {{ pagerfanta(comments) }}
 
     {% else %}
