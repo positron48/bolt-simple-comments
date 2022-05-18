@@ -16,7 +16,6 @@ class Comment
 {
     /**
      * @var int
-     * @Assert\Unique()
      * @Assert\NotBlank()
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")

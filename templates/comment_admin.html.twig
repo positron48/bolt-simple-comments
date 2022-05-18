@@ -49,7 +49,7 @@
                                </div>
                                <div class="listing__row--item is-actions edit-actions" size="normal">
                                    <div class="btn-group">
-                                       <a href="/bolt/edit/{{ comment.content.id }}" data-patience="virtue" class="btn btn-secondary btn-block btn-sm text-nowrap">
+                                       <a href="{{ path('extension_comment_admin_edit', {id: comment.id}) }}" data-patience="virtue" class="btn btn-secondary btn-block btn-sm text-nowrap">
                                            <i class="far fa-edit mr-1"></i> Редактировать </a>
                                        <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-sm btn-secondary edit-actions__dropdown-toggler dropdown-toggle dropdown-toggle-split">
                                            <span class="sr-only">Toggle Dropdown</span>
