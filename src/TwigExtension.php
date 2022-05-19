@@ -38,7 +38,7 @@ class TwigExtension extends AbstractExtension
     {
         $template = '@bolt-simple-comments/comment_list.html.twig';
         if($this->environment->getLoader()->exists('comment_list.html.twig')) {
-            $template = 'comments_list.html.twig';
+            $template = 'comment_list.html.twig';
         }
 
         $comments = $this->commentRepository->getByContentIdQuery($contentId);
