@@ -1,0 +1,17 @@
+{% if comments|length %}
+
+    {% for comment in comments %}
+        <p>
+            <b>id:</b> {{ comment.id }} <br>
+            <b>authorName:</b> {{ comment.authorName }} <br>
+            <b>authorEmail:</b> {{ comment.authorEmail }} <br>
+            <b>message:</b> {{ comment.message }}
+        </p>
+    {% endfor %}
+
+{% else %}
+
+    <p>No comments yet.</p>
+
+{% endif %}
+

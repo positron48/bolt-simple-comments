@@ -36,15 +36,6 @@ class CommentRepository extends ServiceEntityRepository
     }
 
     /**
-     * @return int|mixed[]|string
-     */
-    public function findByContentId(int $contentId)
-    {
-        return $this->getByContentIdQuery($contentId)
-            ->getArrayResult();
-    }
-
-    /**
      * @param int $contentId
      * @return \Doctrine\ORM\Query
      */
@@ -53,7 +44,8 @@ class CommentRepository extends ServiceEntityRepository
         $qb = $this->getQueryBuilder();
 
         $query = $qb
-            ->andWhere('content_id = :value')
+            ->select(['comment'])
+            ->join('Bolt\Entity\Content', 'c', Join::WITH, 'comment.content = c and c.id = :value')
             ->setParameter('value', $contentId);
 
         return $query
@@ -63,27 +55,9 @@ class CommentRepository extends ServiceEntityRepository
     /**
      * @return \Doctrine\ORM\Query
      */
-    public function getAllQuery()
+    public function getAllQuery() : \Doctrine\ORM\Query
     {
         $qb = $this->getQueryBuilder();
-
-//        $qb = $qb
-//            ->select(
-//                [
-//                    'comment',
-//                    'comment.id',
-//                    'comment.authorName',
-//                    'comment.authorEmail',
-//                    'comment.message',
-//                    'comment.contentId',
-//                    't.value',
-//                    'c.contentType'
-//                ]
-//            )
-//            ->join('Bolt\Entity\Content', 'c', Join::WITH, 'comment.contentId = c.id')
-//            ->join('Bolt\Entity\Field', 'f', Join::WITH, 'comment.contentId = f.content')
-//            ->join('Bolt\Entity\FieldTranslation', 't', Join::WITH, 'f.id = t.translatable and f.name = \'title\'')
-//        ;
 
         return $qb->getQuery();
     }
