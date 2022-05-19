@@ -62,6 +62,34 @@ class AdminController extends ExtensionController
     }
 
     /**
+     * @Route("/content/{id}/comment", name="extension_comment_create", methods={"POST"})
+     */
+    public function create(Request $request, Content $content, ManagerRegistry $managerRegistry): Response
+    {
+        $comment = new Comment();
+        $comment->setContent($content);
+
+        $form = $this->createForm(CommentType::class, $comment);
+        $form->handleRequest($request);
+
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $managerRegistry->getManager()->persist($comment);
+            $managerRegistry->getManager()->flush();
+
+            return $this->redirectToRoute('record', [
+                'contentTypeSlug' => $comment->getContent()->getContentType(),
+                'slugOrId' => $comment->getContent()->getSlug(),
+            ]);
+        }
+
+        return $this->render('@bolt-simple-comments/comment_admin_edit.html.twig', [
+            'comment' => $comment,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
      * @Route("/{id}", name="comment_admin_delete", methods={"POST"})
      */
     public function delete(Request $request, Comment $comment, ManagerRegistry $managerRegistry): Response

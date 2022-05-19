@@ -16,7 +16,6 @@ class Comment
 {
     /**
      * @var int
-     * @Assert\NotBlank()
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(type="integer")
@@ -57,7 +56,7 @@ class Comment
     /**
      * @return int
      */
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -127,11 +126,11 @@ class Comment
     }
 
     /**
-     * @param Content $contentId
+     * @param Content $content
      */
-    public function setContent(Content $contentId): void
+    public function setContent(Content $content): void
     {
-        $this->contentId = $contentId;
+        $this->content = $content;
     }
 
 

@@ -16,10 +16,10 @@ After installation in your admin panel /bolt you will see a new menu item called
 There are all comments with edit ability.
 
 
-To show comment list on contentpage use twig function `commentList` with contentId as first param:
+To show comment list on contentpage use twig function `commentList` with content as first param:
 
 ```html
-{{ commentList(content.id) }}
+{{ commentList(content) }}
 ```
 
 Also you can override default template by creating file `comment_list.html.twig` in your theme folder.
