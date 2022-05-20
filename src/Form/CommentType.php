@@ -16,6 +16,7 @@ class CommentType extends AbstractType
             ->add('authorName')
             ->add('authorEmail')
             ->add('message')
+            ->add('field', HiddenType::class, ['mapped' => false])
         ;
     }
 

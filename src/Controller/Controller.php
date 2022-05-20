@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class AdminController extends ExtensionController
+class Controller extends ExtensionController
 {
     /**
      * @Route("/comments", name="extension_comment_admin")
@@ -72,8 +72,12 @@ class AdminController extends ExtensionController
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
 
-
-        if ($form->isSubmitted() && $form->isValid()) {
+        if (
+            isset($request->request->get('comment')['field']) &&
+            empty($request->request->get('comment')['field']) &&
+            $form->isSubmitted() &&
+            $form->isValid()
+        ) {
             $managerRegistry->getManager()->persist($comment);
             $managerRegistry->getManager()->flush();
 
@@ -83,9 +87,10 @@ class AdminController extends ExtensionController
             ]);
         }
 
-        return $this->render('@bolt-simple-comments/comment_admin_edit.html.twig', [
-            'comment' => $comment,
-            'form' => $form->createView(),
+        // пока нет никакой обработки ошибок
+        return $this->redirectToRoute('record', [
+            'contentTypeSlug' => $comment->getContent()->getContentType(),
+            'slugOrId' => $comment->getContent()->getSlug(),
         ]);
     }
 

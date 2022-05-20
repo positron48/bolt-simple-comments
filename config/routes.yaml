@@ -1,4 +1,4 @@
 admin_panel:
-  resource: '../../vendor/positron48/bolt-simple-comments/src/Controller/AdminController.php'
+  resource: '../../vendor/positron48/bolt-simple-comments/src/Controller/Controller.php'
   prefix: '%bolt.backend_url%'
   type: annotation
