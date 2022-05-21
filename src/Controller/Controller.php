@@ -13,8 +13,10 @@ use Pagerfanta\Pagerfanta;
 use Positron48\CommentExtension\Entity\Comment;
 use Positron48\CommentExtension\Form\CommentType;
 use Positron48\CommentExtension\Repository\CommentRepository;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 class Controller extends ExtensionController
@@ -64,7 +66,12 @@ class Controller extends ExtensionController
     /**
      * @Route("/content/{id}/comment", name="extension_comment_create", methods={"POST"})
      */
-    public function create(Request $request, Content $content, ManagerRegistry $managerRegistry): Response
+    public function create(
+        Request $request,
+        Content $content,
+        ManagerRegistry $managerRegistry,
+        FlashBagInterface $flashBag
+    ): Response
     {
         $comment = new Comment();
         $comment->setContent($content);
@@ -85,6 +92,15 @@ class Controller extends ExtensionController
                 'contentTypeSlug' => $comment->getContent()->getContentType(),
                 'slugOrId' => $comment->getContent()->getSlug(),
             ]);
+        }
+
+        foreach ($form->all() as $child) {
+            if (!$child->isValid()) {
+                /** @var FormError $error */
+                foreach ($child->getErrors() as $error) {
+                    $flashBag->add('commentForm', $child->getName() . ': ' . $error->getMessage());
+                }
+            }
         }
 
         // пока нет никакой обработки ошибок

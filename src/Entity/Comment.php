@@ -39,7 +39,7 @@ class Comment
     /**
      * @var string
      * @Assert\NotBlank()
-     * @Assert\Length(min = 5)
+     * @Assert\Length(min = 3)
      * @ORM\Column(type="string")
      */
     protected $message;

@@ -1,4 +1,9 @@
 {{ form_start(form) }}
+
+    {% for flashMessage in app.session.flashbag.get('commentForm') %}
+        <p style="color: red;">{{ flashMessage }}</p>
+    {% endfor %}
+
     {{ form_widget(form) }}
     <button class="btn">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}
