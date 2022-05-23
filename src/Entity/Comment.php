@@ -32,6 +32,7 @@ class Comment
     /**
      * @var string
      * @Assert\NotBlank()
+     * @Assert\Email()
      * @ORM\Column(type="string")
      */
     protected $authorEmail;

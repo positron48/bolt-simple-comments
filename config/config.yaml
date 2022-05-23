@@ -4,3 +4,9 @@ zones:
   frontend: true
   # Load on back end/admin pages. Defaults to false.
   backend: false
+
+# google recaptcha api key
+recaptcha_enterprise:
+  key: '%env(RECAPTCHA3_KEY)%'
+  google_api_key: '%env(RECAPTCHA3_SECRET)%'
+  score_threshold: 0.5
