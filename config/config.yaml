@@ -1,12 +1,7 @@
-# Manages where Prism script will be loaded.
-zones:
-  # Load on front end pages. Defaults to true.
-  frontend: true
-  # Load on back end/admin pages. Defaults to false.
-  backend: false
-
-# google recaptcha api key
+# google recaptcha enterprise
 recaptcha_enterprise:
-  key: '%env(RECAPTCHA3_KEY)%'
-  google_api_key: '%env(RECAPTCHA3_SECRET)%'
+  enabled: true
+  key: '%env(RECAPTCHA_KEY)%'
+  google_api_key: '%env(GOOGLE_API_KEY)%'
+  project_id: '%env(GOOGLE_PROJECT_ID)%'
   score_threshold: 0.5

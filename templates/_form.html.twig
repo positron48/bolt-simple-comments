@@ -1,11 +1,3 @@
-<script src="https://www.google.com/recaptcha/enterprise.js?render=6LfsgxIgAAAAAOqVxBz0Kglg_ChOc-Fw4bdFZdQ6"></script>
-<script>
-    function onSubmit(token) {
-        // document.getElementById("comment_recaptcha").setAttribute('value', token);
-        document.getElementById("form_comment").submit();
-    }
-</script>
-
 {{ form_start(form, {'attr': {'id': 'form_comment'}}) }}
 
     {% for flashMessage in app.session.flashbag.get('commentForm') %}
@@ -14,12 +6,30 @@
 
     {{ form_widget(form) }}
 
-    <button class="btn g-recaptcha"
-        data-sitekey="6LfsgxIgAAAAAOqVxBz0Kglg_ChOc-Fw4bdFZdQ6"
-        data-callback='onSubmit'
-        data-action='submit'
-        disabled
-    >
-        {{ button_label|default('Save') }}
-    </button>
+    {% if recaptchaEnabled %}
+        <button class="btn g-recaptcha"
+            data-sitekey="{{ recaptchaKey }}"
+            data-callback='onSubmit'
+            data-action='submit'
+            disabled
+        >
+            {{ button_label|default('Save') }}
+        </button>
+
+        <script src="https://www.google.com/recaptcha/enterprise.js?render={{ recaptchaKey }}"></script>
+        <script>
+            function onSubmit(token) {
+                document.getElementById("form_comment").submit();
+            }
+        </script>
+        <style>
+            .grecaptcha-badge {
+                display: none;
+            }
+        </style>
+    {% else %}
+        <button class="btn">
+            {{ button_label|default('Save') }}
+        </button>
+    {% endif %}
 {{ form_end(form) }}

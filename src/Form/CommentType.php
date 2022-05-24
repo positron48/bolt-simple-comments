@@ -16,7 +16,6 @@ class CommentType extends AbstractType
             ->add('authorName')
             ->add('authorEmail')
             ->add('message')
-//            ->add('recaptcha', HiddenType::class, ['mapped' => false])
             ->add('field', HiddenType::class, ['mapped' => false])
         ;
     }

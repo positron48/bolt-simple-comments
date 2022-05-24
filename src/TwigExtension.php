@@ -8,6 +8,7 @@ use Bolt\Entity\Content;
 use Positron48\CommentExtension\Entity\Comment;
 use Positron48\CommentExtension\Form\CommentType;
 use Positron48\CommentExtension\Repository\CommentRepository;
+use Positron48\CommentExtension\Service\ConfigService;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig\Environment;
@@ -33,17 +34,23 @@ class TwigExtension extends AbstractExtension
      * @var UrlGeneratorInterface
      */
     protected $urlGenerator;
+    /**
+     * @var ConfigService
+     */
+    protected $configService;
 
     public function __construct(
         CommentRepository $commentRepository,
         Environment $environment,
         FormFactoryInterface $formFactory,
-        UrlGeneratorInterface $urlGenerator
+        UrlGeneratorInterface $urlGenerator,
+        ConfigService $configService
     ) {
         $this->commentRepository = $commentRepository;
         $this->environment = $environment;
         $this->formFactory = $formFactory;
         $this->urlGenerator = $urlGenerator;
+        $this->configService = $configService;
     }
 
     public function getFunctions()
@@ -74,6 +81,8 @@ class TwigExtension extends AbstractExtension
         $html = $this->environment->render($template, [
             'comments' => $comments->getArrayResult(),
             'form' => $form->createView(),
+            'recaptchaEnabled' => $this->configService->isRecaptchaEnabled() ?: false,
+            'recaptchaKey' => $this->configService->getSiteKey()
         ]);
 
         return new Markup($html, 'UTF-8');
