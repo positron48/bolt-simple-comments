@@ -5,3 +5,7 @@ recaptcha_enterprise:
   google_api_key: '%env(GOOGLE_API_KEY)%'
   project_id: '%env(GOOGLE_PROJECT_ID)%'
   score_threshold: 0.5
+
+# gravatar
+gravatar:
+  enabled: true

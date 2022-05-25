@@ -102,4 +102,12 @@ class ConfigService
             (float) $this->config['recaptcha_enterprise']['score_threshold'] :
             1;
     }
+
+    public function isGravatarEnabled()
+    {
+        $this->config = $this->getConfigArray();
+        return isset($this->config['gravatar']) ?
+            (bool) $this->config['gravatar']['enabled'] :
+            false;
+    }
 }

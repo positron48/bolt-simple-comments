@@ -6,6 +6,8 @@
 
     {{ form_widget(form) }}
 
+    <p id="form_comment_error" style="color: red;"></p>
+
     {% if recaptchaEnabled %}
         <button class="btn g-recaptcha"
             data-sitekey="{{ recaptchaKey }}"
@@ -19,6 +21,11 @@
         <script src="https://www.google.com/recaptcha/enterprise.js?render={{ recaptchaKey }}"></script>
         <script>
             function onSubmit(token) {
+                if(!document.getElementById("form_comment").checkValidity()) {
+                    // todo: add custom message with error -_-, native are not supported here
+                    document.getElementById("form_comment_error").innerHTML = "{{ __("Invalid data") }}";
+                    return false;
+                }
                 document.getElementById("form_comment").submit();
             }
         </script>

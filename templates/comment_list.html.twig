@@ -3,6 +3,11 @@
     {% for comment in comments %}
         <p>
             <b>id:</b> {{ comment.id }} <br>
+            <b>gravatar:</b>
+            {% if gravatarEnabled %}
+                <img src="{{ comment.gravatar }}" alt="">
+            {% endif %}<br>
+
             <b>authorName:</b> {{ comment.authorName }} <br>
             <b>authorEmail:</b> {{ comment.authorEmail }} <br>
             <b>message:</b> {{ comment.message }}

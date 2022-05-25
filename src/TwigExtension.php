@@ -79,10 +79,11 @@ class TwigExtension extends AbstractExtension
         ;
 
         $html = $this->environment->render($template, [
-            'comments' => $comments->getArrayResult(),
+            'comments' => $comments->getResult(),
             'form' => $form->createView(),
+            'gravatarEnabled' => $this->configService->isGravatarEnabled() ?: false,
             'recaptchaEnabled' => $this->configService->isRecaptchaEnabled() ?: false,
-            'recaptchaKey' => $this->configService->getSiteKey()
+            'recaptchaKey' => $this->configService->getSiteKey(),
         ]);
 
         return new Markup($html, 'UTF-8');

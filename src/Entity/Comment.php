@@ -134,5 +134,19 @@ class Comment
         $this->content = $content;
     }
 
+    /**
+     * @param int $size
+     * @param string $imageset
+     * @param string $rating
+     * @return string
+     */
+    public function getGravatar(int $size = 80, string $imageset = 'mp', string $rating = 'g'): string
+    {
+        $url = 'https://www.gravatar.com/avatar/';
+        $url .= md5( strtolower( trim( $this->getAuthorEmail() ) ) );
+        $url .= "?s=$size&d=$imageset&r=$rating";
+        return $url;
+    }
+
 
 }
