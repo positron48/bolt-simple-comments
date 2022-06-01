@@ -35,7 +35,7 @@
                                <div class="listing__row--item is-meta">
                                    <ul class="listing__row--list">
                                        <li class="text-nowrap">
-                                           <span title="published" class="status is-published"></span> 22.12.2021
+                                           <span title="published" class="status is-published"></span> {{ comment.createdAt|date('Y-m-d H:i') }}
                                        </li>
                                        <li>
                                            <i class="fas fa-user"></i> {{ comment.authorName }}

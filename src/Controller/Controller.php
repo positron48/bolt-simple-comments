@@ -61,6 +61,7 @@ class Controller extends ExtensionController
         return $this->render('@bolt-simple-comments/comment_admin_edit.html.twig', [
             'comment' => $comment,
             'form' => $form->createView(),
+            'recaptchaEnabled' => false,
         ]);
     }
 
@@ -78,6 +79,8 @@ class Controller extends ExtensionController
     {
         $comment = new Comment();
         $comment->setContent($content);
+        $comment->setCreatedAt(new \DateTime());
+        $comment->setStatus(Comment::STATUS_NEW);
 
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
@@ -97,6 +100,8 @@ class Controller extends ExtensionController
                 $managerRegistry->getManager()->persist($comment);
                 $managerRegistry->getManager()->flush();
             }
+
+
 
             return $this->redirectToRoute('record', [
                 'contentTypeSlug' => $comment->getContent()->getContentType(),
