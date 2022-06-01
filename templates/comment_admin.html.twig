@@ -20,6 +20,9 @@
 {#                               </div>#}
 {#                           </div>#}
                            <div class="listing__row is-normal">
+                               {% if gravatarEnabled %}
+                                    <img width="88" height="88" src="{{ comment.gravatar }}" alt="">
+                               {% endif %}
                                <div class="listing__row--item is-details">
                                    <a href="/bolt/edit/{{ comment.content.id }}" title="setting-up-web-server-on-wsl-2" class="listing__row--item-title">
                                         {{ comment.content.contentType }} [{{ comment.content.id }}]

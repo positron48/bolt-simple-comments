@@ -24,7 +24,7 @@ class Controller extends ExtensionController
     /**
      * @Route("/comments", name="extension_comment_admin")
      */
-    public function index(CommentRepository $commentRepository, Request $request): Response
+    public function index(CommentRepository $commentRepository, Request $request, ConfigService $configService): Response
     {
         $adapter = new QueryAdapter($commentRepository->getAllQuery(), false);
         $comments = new Pagerfanta($adapter);
@@ -37,7 +37,8 @@ class Controller extends ExtensionController
 
         $context = [
             'title' => 'Comments',
-            'comments' => $comments
+            'comments' => $comments,
+            'gravatarEnabled' => $configService->isGravatarEnabled() ?: false,
         ];
 
         return $this->render('@bolt-simple-comments/comment_admin.html.twig', $context);
