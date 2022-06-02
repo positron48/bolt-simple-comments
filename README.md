@@ -8,6 +8,7 @@ This Bolt extension can be used as comment system.
 
 ```bash
 composer require positron48/comment-extension
+php bin/console doctrine:migrations:migrate
 ```
 
 If you want to use Google recaptcha enterprise - get the api key via [this guide](https://cloud.google.com/recaptcha-enterprise/docs/set-up-non-google-cloud-environments-api-keys?hl=en_US) and next steps:
