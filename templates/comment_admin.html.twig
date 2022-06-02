@@ -53,18 +53,18 @@
                                <div class="listing__row--item is-actions edit-actions" size="normal">
                                    <div class="btn-group">
                                        <a href="{{ path('extension_comment_admin_edit', {id: comment.id}) }}" data-patience="virtue" class="btn btn-secondary btn-block btn-sm text-nowrap">
-                                           <i class="far fa-edit mr-1"></i> Редактировать </a>
-                                       <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-sm btn-secondary edit-actions__dropdown-toggler dropdown-toggle dropdown-toggle-split">
-                                           <span class="sr-only">Toggle Dropdown</span>
-                                       </button>
-                                       <div class="edit-actions__dropdown dropdown-menu dropdown-menu-right" style="width: 320px;">
-                                           <a href="/post/setting-up-web-server-on-wsl-2" target="_blank" class="dropdown-item">
-                                               <i class="fas fa-w fa-external-link-square-alt"></i> Просмотр на сайте
-                                           </a>
-                                           <span class="dropdown-item-text">
-                                               <i class="fas fa-redo fa-w"></i> Какая-то информация
-                                           </span>
-                                       </div>
+                                           <i class="far fa-edit mr-1"></i> {{ __('edit comment')}} </a>
+{#                                       <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-sm btn-secondary edit-actions__dropdown-toggler dropdown-toggle dropdown-toggle-split">#}
+{#                                           <span class="sr-only">Toggle Dropdown</span>#}
+{#                                       </button>#}
+{#                                       <div class="edit-actions__dropdown dropdown-menu dropdown-menu-right" style="width: 320px;">#}
+{#                                           <a href="/post/setting-up-web-server-on-wsl-2" target="_blank" class="dropdown-item">#}
+{#                                               <i class="fas fa-w fa-external-link-square-alt"></i> Просмотр на сайте#}
+{#                                           </a>#}
+{#                                           <span class="dropdown-item-text">#}
+{#                                               <i class="fas fa-redo fa-w"></i> Какая-то информация#}
+{#                                           </span>#}
+{#                                       </div>#}
                                    </div>
                                </div>
                            </div>
@@ -78,7 +78,7 @@
 
     {% else %}
 
-        <p>No comments yet.</p>
+        <p>{{ __('No comments yet') }}</p>
 
     {% endif %}
 
