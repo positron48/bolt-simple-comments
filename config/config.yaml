@@ -1,6 +1,6 @@
 # google recaptcha enterprise
 recaptcha_enterprise:
-  enabled: true
+  enabled: false
   key: '%env(RECAPTCHA_KEY)%'
   google_api_key: '%env(GOOGLE_API_KEY)%'
   project_id: '%env(GOOGLE_PROJECT_ID)%'
