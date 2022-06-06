@@ -7,9 +7,12 @@ This Bolt extension can be used as comment system.
 ## Installation:
 
 ```bash
-composer require positron48/comment-extension
+composer require positron48/bolt-simple-comments
 php bin/console doctrine:migrations:migrate
+php bin/console cache:clear --no-warmup
 ```
+
+Command `cache:clear` needs to refresh admin pages list.
 
 If you want to use Google recaptcha enterprise - get the api key via [this guide](https://cloud.google.com/recaptcha-enterprise/docs/set-up-non-google-cloud-environments-api-keys?hl=en_US) and next steps:
 

@@ -3,6 +3,7 @@
 
 namespace Positron48\CommentExtension\Controller;
 
+use Bolt\Controller\Backend\BackendZoneInterface;
 use Bolt\Entity\Content;
 use Bolt\Extension\ExtensionController;
 use Doctrine\Persistence\ManagerRegistry;
@@ -19,7 +20,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
-class Controller extends ExtensionController
+class Controller extends ExtensionController implements BackendZoneInterface
 {
     /**
      * @Route("/comments", name="extension_comment_admin")
