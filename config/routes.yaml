@@ -2,3 +2,7 @@ admin_panel:
   resource: '../../vendor/positron48/bolt-simple-comments/src/Controller/Controller.php'
   prefix: '%bolt.backend_url%'
   type: annotation
+
+frontend:
+  resource: '../../vendor/positron48/bolt-simple-comments/src/Controller/FrontendController.php'
+  type: annotation
