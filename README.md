@@ -24,6 +24,23 @@ If you want to use Google recaptcha enterprise - get the api key via [this guide
   Default value is `../config/extensions/service-account-recaptcha-credentials.json`
 
 
+Add to .env file some parameters:
+
+```dotenv
+RECAPTCHA_KEY=
+GOOGLE_API_KEY=
+GOOGLE_PROJECT_ID=
+GOOGLE_APPLICATION_RECAPTHA_CREDENTIALS=../config/extensions/service-account-recaptcha-credentials.json
+```
+
+`RECAPTCHA_KEY` - Key Id of [your recaptcha enterprise](https://console.cloud.google.com/security/recaptcha) key
+
+`GOOGLE_API_KEY` - Api key from section 'API Keys' in [Credentials](https://console.cloud.google.com/apis/credentials) page
+
+`GOOGLE_PROJECT_ID` - Project Id of your project in [Google Cloud Platform](https://console.cloud.google.com/iam-admin/settings)
+
+`GOOGLE_APPLICATION_RECAPTHA_CREDENTIALS` - path to your json file with credentials.
+
 
 ## Usage
 
