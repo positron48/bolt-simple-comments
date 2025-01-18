@@ -35,7 +35,7 @@
                                <div class="listing__row--item is-meta">
                                    <ul class="listing__row--list">
                                        <li class="text-nowrap">
-                                           <span title="published" class="status is-published"></span> {{ comment.createdAt|date('Y-m-d H:i') }}
+                                           <span title="{{ 'published'|trans }}" class="status is-published"></span> {{ comment.createdAt|date('Y-m-d H:i') }}
                                        </li>
                                        <li>
                                            <i class="fas fa-user"></i> {{ comment.authorName }}
@@ -53,7 +53,7 @@
                                <div class="listing__row--item is-actions edit-actions" size="normal">
                                    <div class="btn-group">
                                        <a href="{{ path('extension_comment_admin_edit', {id: comment.id}) }}" data-patience="virtue" class="btn btn-secondary btn-block btn-sm text-nowrap">
-                                           <i class="far fa-edit mr-1"></i> {{ __('edit comment')}} </a>
+                                           <i class="far fa-edit mr-1"></i> {{ 'edit comment'|trans }}</a>
 {#                                       <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-sm btn-secondary edit-actions__dropdown-toggler dropdown-toggle dropdown-toggle-split">#}
 {#                                           <span class="sr-only">Toggle Dropdown</span>#}
 {#                                       </button>#}
@@ -78,7 +78,7 @@
 
     {% else %}
 
-        <p>{{ __('No comments yet') }}</p>
+        <p>{{ 'No comments yet'|trans }}</p>
 
     {% endif %}
 

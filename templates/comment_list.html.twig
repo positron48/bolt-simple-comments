@@ -16,8 +16,8 @@
 
 {% else %}
 
-    <p>No comments yet.</p>
+    <p>{{ 'No comments yet'|trans }}</p>
 
 {% endif %}
 
-{{ include('@bolt-simple-comments/_form.html.twig', {'button_label': 'Comment'}) }}
+{{ include('@bolt-simple-comments/_form.html.twig', {'button_label': 'Comment'|trans}) }}

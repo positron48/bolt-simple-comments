@@ -7,5 +7,65 @@
         <target>Редактировать</target>
       </segment>
     </unit>
+    <unit id="no_comments_yet" name="No comments yet">
+      <segment>
+        <source>No comments yet</source>
+        <target>Комментариев пока нет</target>
+      </segment>
+    </unit>
+    <unit id="back_to_list" name="back to list">
+      <segment>
+        <source>back to list</source>
+        <target>вернуться к списку</target>
+      </segment>
+    </unit>
+    <unit id="update" name="Update">
+      <segment>
+        <source>Update</source>
+        <target>Обновить</target>
+      </segment>
+    </unit>
+    <unit id="comment" name="Comment">
+      <segment>
+        <source>Comment</source>
+        <target>Комментировать</target>
+      </segment>
+    </unit>
+    <unit id="edit_comment_title" name="Edit Comment">
+      <segment>
+        <source>Edit Comment</source>
+        <target>Редактирование комментария</target>
+      </segment>
+    </unit>
+    <unit id="published" name="published">
+      <segment>
+        <source>published</source>
+        <target>опубликовано</target>
+      </segment>
+    </unit>
+    <unit id="save" name="Save">
+      <segment>
+        <source>Save</source>
+        <target>Сохранить</target>
+      </segment>
+    </unit>
+    <unit id="invalid_data" name="Invalid data">
+      <segment>
+        <source>Invalid data</source>
+        <target>Некорректные данные</target>
+      </segment>
+    </unit>
+    <unit id="delete" name="Delete">
+      <segment>
+        <source>Delete</source>
+        <target>Удалить</target>
+      </segment>
+    </unit>
+    <unit id="confirm_delete" name="Are you sure you want to delete this item?">
+      <segment>
+        <source>Are you sure you want to delete this item?</source>
+        <target>Вы уверены, что хотите удалить этот элемент?</target>
+      </segment>
+    </unit>
   </file>
 </xliff>

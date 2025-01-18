@@ -1,11 +1,11 @@
 {% extends '@bolt/_base/layout.html.twig' %}
 
-{% block title %}Edit Comment{% endblock %}
+{% block title %}{{ 'Edit Comment'|trans }}{% endblock %}
 
 {% block main %}
-    <a href="{{ path('extension_comment_admin') }}">back to list</a>
+    <a href="{{ path('extension_comment_admin') }}">{{ 'back to list'|trans }}</a>
 
-    {{ include('@bolt-simple-comments/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('@bolt-simple-comments/_form.html.twig', {'button_label': 'Update'|trans}) }}
 
     {{ include('@bolt-simple-comments/_delete_form.html.twig') }}
 {% endblock %}

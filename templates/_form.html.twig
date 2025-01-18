@@ -15,7 +15,7 @@
             data-action='submit'
             disabled
         >
-            {{ button_label|default('Save') }}
+            {{ button_label|default('Save'|trans) }}
         </button>
 
         <script src="https://www.google.com/recaptcha/enterprise.js?render={{ recaptchaKey }}"></script>
@@ -23,7 +23,7 @@
             function onSubmit(token) {
                 if(!document.getElementById("form_comment").checkValidity()) {
                     // todo: add custom message with error -_-, native are not supported here
-                    document.getElementById("form_comment_error").innerHTML = "{{ __("Invalid data") }}";
+                    document.getElementById("form_comment_error").innerHTML = "{{ 'Invalid data'|trans }}";
                     return false;
                 }
                 document.getElementById("form_comment").submit();
@@ -36,7 +36,7 @@
         </style>
     {% else %}
         <button class="btn">
-            {{ button_label|default('Save') }}
+            {{ button_label|default('Save'|trans) }}
         </button>
     {% endif %}
 {{ form_end(form) }}
