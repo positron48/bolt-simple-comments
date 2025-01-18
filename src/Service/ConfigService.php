@@ -58,7 +58,7 @@ class ConfigService
     protected function prepareValue($value)
     {
         if(preg_match('#%env\((.*)\)%#', $value, $matches)) {
-            $value = $_ENV[$matches[1]] ?: $value;
+            $value = isset($_ENV[$matches[1]]) ? $_ENV[$matches[1]] : $value;
         }
         return $value;
     }
