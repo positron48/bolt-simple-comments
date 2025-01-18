@@ -67,5 +67,23 @@
         <target>Êtes-vous sûr de vouloir supprimer cet élément ?</target>
       </segment>
     </unit>
+    <unit id="form.author_name" name="Author name">
+      <segment>
+        <source>Author name</source>
+        <target>Nom de l'auteur</target>
+      </segment>
+    </unit>
+    <unit id="form.author_email" name="Author email">
+      <segment>
+        <source>Author email</source>
+        <target>Email de l'auteur</target>
+      </segment>
+    </unit>
+    <unit id="form.message" name="Message">
+      <segment>
+        <source>Message</source>
+        <target>Message</target>
+      </segment>
+    </unit>
   </file>
 </xliff> 

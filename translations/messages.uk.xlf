@@ -67,5 +67,23 @@
         <target>Ви впевнені, що хочете видалити цей елемент?</target>
       </segment>
     </unit>
+    <unit id="form.author_name" name="Author name">
+      <segment>
+        <source>Author name</source>
+        <target>Ім'я автора</target>
+      </segment>
+    </unit>
+    <unit id="form.author_email" name="Author email">
+      <segment>
+        <source>Author email</source>
+        <target>Email автора</target>
+      </segment>
+    </unit>
+    <unit id="form.message" name="Message">
+      <segment>
+        <source>Message</source>
+        <target>Повідомлення</target>
+      </segment>
+    </unit>
   </file>
 </xliff> 

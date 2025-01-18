@@ -67,5 +67,23 @@
         <target>Sind Sie sicher, dass Sie diesen Eintrag löschen möchten?</target>
       </segment>
     </unit>
+    <unit id="form.author_name" name="Author name">
+      <segment>
+        <source>Author name</source>
+        <target>Name des Autors</target>
+      </segment>
+    </unit>
+    <unit id="form.author_email" name="Author email">
+      <segment>
+        <source>Author email</source>
+        <target>E-Mail des Autors</target>
+      </segment>
+    </unit>
+    <unit id="form.message" name="Message">
+      <segment>
+        <source>Message</source>
+        <target>Nachricht</target>
+      </segment>
+    </unit>
   </file>
 </xliff> 
