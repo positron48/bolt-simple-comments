@@ -24,9 +24,14 @@
                                     <img width="88" height="88" src="{{ comment.gravatar }}" alt="">
                                {% endif %}
                                <div class="listing__row--item is-details">
-                                   <a href="/bolt/edit/{{ comment.content.id }}" title="setting-up-web-server-on-wsl-2" class="listing__row--item-title">
-                                        {{ comment.content.contentType }} [{{ comment.content.id }}]
+                                   <a href="{{ comment.content|link }}" title="{{ comment.content|link }}" class="listing__row--item-title">
+                                        {{ comment.content|title }}
                                    </a>
+                                   <span style="margin-left: 5px;">
+                                       <a href="{{ comment.content|edit_link }}" title="{{ comment.content|link }}" class="listing__row--item-title">
+                                            [{{ comment.content.id }}]
+                                       </a>
+                                   </span>
                                    <br>
                                    <span class="listing__row--item-title-excerpt">
                                        [{{ comment.id }}] {{ comment.message }}
@@ -54,6 +59,12 @@
                                    <div class="btn-group">
                                        <a href="{{ path('extension_comment_admin_edit', {id: comment.id}) }}" data-patience="virtue" class="btn btn-secondary btn-block btn-sm text-nowrap">
                                            <i class="far fa-edit mr-1"></i> {{ 'edit comment'|trans }}</a>
+                                       <form method="post" action="{{ path('comment_admin_delete', {id: comment.id}) }}" style="display: inline;" onsubmit="return confirm('{{ 'Are you sure you want to delete this comment?'|trans }}')">
+                                           <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ comment.id) }}">
+                                           <button type="submit" class="btn btn-danger btn-sm text-nowrap" style="margin-left: 5px;">
+                                               <i class="far fa-trash-alt mr-1"></i> {{ 'delete'|trans }}
+                                           </button>
+                                       </form>
 {#                                       <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-sm btn-secondary edit-actions__dropdown-toggler dropdown-toggle dropdown-toggle-split">#}
 {#                                           <span class="sr-only">Toggle Dropdown</span>#}
 {#                                       </button>#}

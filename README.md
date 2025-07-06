@@ -57,3 +57,17 @@ To show comment list on contentpage use twig function `commentList` with content
 ```
 
 Also you can override default template by creating file `comment_list.html.twig` in your theme folder.
+
+## Spam Filtering
+
+You can enable simple spam filtering for comments using a configurable regular expression. This is controlled by the `COMMENT_SPAM_REGEX` environment variable.
+
+### How to configure
+
+Add the following line to your `.env` file (or set it in your Docker environment):
+
+```dotenv
+COMMENT_SPAM_REGEX='/\<a\s+href=/i'
+```
+
+This regex will filter out comments containing HTML `<a>` tags with `href` attributes (common for spam links). You can set your own pattern as needed.

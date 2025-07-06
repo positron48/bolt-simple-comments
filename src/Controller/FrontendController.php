@@ -10,6 +10,7 @@ use Positron48\CommentExtension\Entity\Comment;
 use Positron48\CommentExtension\Form\CommentType;
 use Positron48\CommentExtension\Service\ConfigService;
 use Positron48\CommentExtension\Service\GoogleRecaptchaService;
+use Positron48\CommentExtension\Service\SpamFilterService;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,7 +28,8 @@ class FrontendController extends ExtensionController
         ManagerRegistry $managerRegistry,
         FlashBagInterface $flashBag,
         GoogleRecaptchaService $recaptchaService,
-        ConfigService $configService
+        ConfigService $configService,
+        SpamFilterService $spamFilterService
     ): Response
     {
         $comment = new Comment();
@@ -44,14 +46,24 @@ class FrontendController extends ExtensionController
             $form->isSubmitted() &&
             $form->isValid()
         ) {
+            if ($spamFilterService->isSpam($comment->getMessage(), $comment->getAuthorName())) {
+                // TODO: notify admin about spam
+                $flashBag->add('commentForm', 'Sorry, your comment has been identified as spam');
+                return $this->redirectToRoute('record', [
+                    'contentTypeSlug' => $comment->getContent()->getContentType(),
+                    'slugOrId' => $comment->getContent()->getSlug(),
+                ]);
+            }
             if(
                 $configService->isRecaptchaEnabled() &&
                 $recaptchaService->getScore($request->request->get('g-recaptcha-response')) < $configService->getScoreThreshold()
             ){
-                $flashBag->add('commentForm', 'sorry, you are bot');
+                // TODO: notify admin about bot
+                $flashBag->add('commentForm', 'Sorry, you have been identified as a bot');
             } else {
                 $managerRegistry->getManager()->persist($comment);
                 $managerRegistry->getManager()->flush();
+                // TODO: notify admin about comments
             }
 
             return $this->redirectToRoute('record', [
