@@ -13,7 +13,7 @@ class SpamFilterService
     public function __construct(
         ?string $spamRegex = null
     ) {
-        $this->spamRegex = getenv('COMMENT_SPAM_REGEX') ?: $spamRegex;
+        $this->spamRegex = $_ENV['COMMENT_SPAM_REGEX'] ?? $spamRegex;
     }
 
     /**
