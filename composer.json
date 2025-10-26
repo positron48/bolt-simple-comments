@@ -25,5 +25,11 @@
     "prefer-stable": true,
     "extra": {
         "entrypoint": "Positron48\\CommentExtension\\Extension"
+    },
+    "config": {
+        "allow-plugins": {
+            "symfony/flex": true,
+            "drupol/composer-packages": true
+        }
     }
 }

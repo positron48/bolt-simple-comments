@@ -2,13 +2,20 @@
 
 namespace Positron48\CommentExtension\Service;
 
+use Positron48\CommentExtension\Entity\Comment;
+use Psr\Log\LoggerInterface;
+
 class SpamFilterService
 {
-    private ?string $spamRegex;
+    protected $spamRegex;
+    protected $commentLoggingService;
 
-    public function __construct(?string $spamRegex = null)
-    {
-        $this->spamRegex = getenv('COMMENT_SPAM_REGEX') ?: null;
+    public function __construct(
+        CommentLoggingService $commentLoggingService,
+        ?string $spamRegex = null
+    ) {
+        $this->commentLoggingService = $commentLoggingService;
+        $this->spamRegex = getenv('COMMENT_SPAM_REGEX') ?: $spamRegex;
     }
 
     public function isSpam(string $message, string $authorName): bool
@@ -17,8 +24,32 @@ class SpamFilterService
             return false;
         }
 
-        return (bool) preg_match($this->spamRegex, $message) ||
-            (bool) preg_match($this->spamRegex, $authorName);
+        $isMessageSpam = (bool) preg_match($this->spamRegex, $message);
+        $isAuthorSpam = (bool) preg_match($this->spamRegex, $authorName);
+        $isSpam = $isMessageSpam || $isAuthorSpam;
+
+        return $isSpam;
+    }
+
+    /**
+     * Проверка на спам с логированием
+     */
+    public function isSpamWithLogging(Comment $comment): bool
+    {
+        $isSpam = $this->isSpam($comment->getMessage(), $comment->getAuthorName());
+        
+        $reason = null;
+        if ($isSpam) {
+            if (preg_match($this->spamRegex, $comment->getMessage())) {
+                $reason = 'Message matched spam regex';
+            } elseif (preg_match($this->spamRegex, $comment->getAuthorName())) {
+                $reason = 'Author name matched spam regex';
+            }
+        }
+
+        $this->commentLoggingService->logSpamDetection($comment, $isSpam, $reason);
+
+        return $isSpam;
     }
 
     public function getSpamRegex(): ?string

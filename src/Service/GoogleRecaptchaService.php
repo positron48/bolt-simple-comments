@@ -8,6 +8,7 @@ use Google\Cloud\RecaptchaEnterprise\V1\Assessment;
 use Google\Cloud\RecaptchaEnterprise\V1\Event;
 use Google\Cloud\RecaptchaEnterprise\V1\TokenProperties\InvalidReason;
 use Psr\Log\LoggerInterface;
+use Positron48\CommentExtension\Service\CommentLoggingService;
 
 class GoogleRecaptchaService
 {
@@ -19,13 +20,16 @@ class GoogleRecaptchaService
      * @var ConfigService
      */
     protected $configService;
+    protected $commentLoggingService;
 
     public function __construct(
         LoggerInterface $logger,
-        ConfigService $configService
+        ConfigService $configService,
+        CommentLoggingService $commentLoggingService
     ){
         $this->logger = $logger;
         $this->configService = $configService;
+        $this->commentLoggingService = $commentLoggingService;
     }
 
     /**
@@ -54,16 +58,37 @@ class GoogleRecaptchaService
             );
 
             if ($response->getTokenProperties()->getValid() == false) {
+                $invalidReason = InvalidReason::name($response->getTokenProperties()->getInvalidReason());
                 $this->logger->error(
-                    'The CreateAssessment() call failed because the token was invalid for the following reason: ' .
-                    InvalidReason::name($response->getTokenProperties()->getInvalidReason())
+                    'The CreateAssessment() call failed because the token was invalid for the following reason: ' . $invalidReason
+                );
+                
+                // Логируем неудачный запрос к reCAPTCHA
+                $this->commentLoggingService->logRecaptchaRequest(
+                    $token, 
+                    0, 
+                    false, 
+                    'Invalid token: ' . $invalidReason
                 );
             } else {
-                return $response->getRiskAnalysis()->getScore();
+                $score = $response->getRiskAnalysis()->getScore();
+                
+                // Логируем успешный запрос к reCAPTCHA
+                $this->commentLoggingService->logRecaptchaRequest($token, $score, true);
+                
+                return $score;
             }
         } catch (\Exception $e) {
             $this->logger->error(
                 'CreateAssessment() call failed with the following error: ' . $e->getMessage()
+            );
+            
+            // Логируем ошибку запроса к reCAPTCHA
+            $this->commentLoggingService->logRecaptchaRequest(
+                $token, 
+                0, 
+                false, 
+                $e->getMessage()
             );
         }
         return 0;

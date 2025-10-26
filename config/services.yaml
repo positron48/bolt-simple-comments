@@ -18,6 +18,9 @@ services:
     arguments: [ '@Symfony\Component\Routing\Generator\UrlGeneratorInterface' ]
     tags: [ 'bolt.extension_backend_menu' ]
 
+  Positron48\CommentExtension\Service\CommentLoggingService:
+    arguments: [ '@logger' ]
+
 ## Add the translatable labels for this extension.
 framework:
   translator:

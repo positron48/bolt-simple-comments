@@ -11,6 +11,7 @@ use Positron48\CommentExtension\Form\CommentType;
 use Positron48\CommentExtension\Service\ConfigService;
 use Positron48\CommentExtension\Service\GoogleRecaptchaService;
 use Positron48\CommentExtension\Service\SpamFilterService;
+use Positron48\CommentExtension\Service\CommentLoggingService;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -29,7 +30,8 @@ class FrontendController extends ExtensionController
         FlashBagInterface $flashBag,
         GoogleRecaptchaService $recaptchaService,
         ConfigService $configService,
-        SpamFilterService $spamFilterService
+        SpamFilterService $spamFilterService,
+        CommentLoggingService $commentLoggingService
     ): Response
     {
         $comment = new Comment();
@@ -46,24 +48,39 @@ class FrontendController extends ExtensionController
             $form->isSubmitted() &&
             $form->isValid()
         ) {
-            if ($spamFilterService->isSpam($comment->getMessage(), $comment->getAuthorName())) {
-                // TODO: notify admin about spam
+            // Проверка на спам с логированием
+            if ($spamFilterService->isSpamWithLogging($comment)) {
                 $flashBag->add('commentForm', 'Sorry, your comment has been identified as spam');
                 return $this->redirectToRoute('record', [
                     'contentTypeSlug' => $comment->getContent()->getContentType(),
                     'slugOrId' => $comment->getContent()->getSlug(),
                 ]);
             }
-            if(
-                $configService->isRecaptchaEnabled() &&
-                $recaptchaService->getScore($request->request->get('g-recaptcha-response')) < $configService->getScoreThreshold()
-            ){
-                // TODO: notify admin about bot
-                $flashBag->add('commentForm', 'Sorry, you have been identified as a bot');
+
+            // Проверка reCAPTCHA с логированием
+            if ($configService->isRecaptchaEnabled()) {
+                $recaptchaToken = $request->request->get('g-recaptcha-response');
+                $score = $recaptchaService->getScore($recaptchaToken);
+                $threshold = $configService->getScoreThreshold();
+                
+                // Логируем получение рейтинга
+                $commentLoggingService->logRecaptchaScore($score, $threshold, $score >= $threshold);
+                
+                if ($score < $threshold) {
+                    // Логируем детектирование бота
+                    $commentLoggingService->logBotDetection($comment, $score, $threshold);
+                    $flashBag->add('commentForm', 'Sorry, you have been identified as a bot');
+                } else {
+                    // Сохраняем комментарий и логируем успешное создание
+                    $managerRegistry->getManager()->persist($comment);
+                    $managerRegistry->getManager()->flush();
+                    $commentLoggingService->logCommentCreation($comment, true);
+                }
             } else {
+                // Сохраняем комментарий без reCAPTCHA и логируем
                 $managerRegistry->getManager()->persist($comment);
                 $managerRegistry->getManager()->flush();
-                // TODO: notify admin about comments
+                $commentLoggingService->logCommentCreation($comment, true);
             }
 
             return $this->redirectToRoute('record', [
