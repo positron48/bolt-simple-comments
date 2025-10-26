@@ -48,6 +48,9 @@ class FrontendController extends ExtensionController
             $form->isSubmitted() &&
             $form->isValid()
         ) {
+            // Устанавливаем сервис логирования в SpamFilterService
+            $spamFilterService->setCommentLoggingService($commentLoggingService);
+            
             // Проверка на спам с логированием
             if ($spamFilterService->isSpamWithLogging($comment)) {
                 $flashBag->add('commentForm', 'Sorry, your comment has been identified as spam');

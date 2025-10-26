@@ -11,11 +11,17 @@ class SpamFilterService
     protected $commentLoggingService;
 
     public function __construct(
-        CommentLoggingService $commentLoggingService,
         ?string $spamRegex = null
     ) {
-        $this->commentLoggingService = $commentLoggingService;
         $this->spamRegex = getenv('COMMENT_SPAM_REGEX') ?: $spamRegex;
+    }
+
+    /**
+     * Устанавливает сервис логирования (для избежания циклических зависимостей)
+     */
+    public function setCommentLoggingService(CommentLoggingService $commentLoggingService): void
+    {
+        $this->commentLoggingService = $commentLoggingService;
     }
 
     public function isSpam(string $message, string $authorName): bool
@@ -47,7 +53,9 @@ class SpamFilterService
             }
         }
 
-        $this->commentLoggingService->logSpamDetection($comment, $isSpam, $reason);
+        if ($this->commentLoggingService) {
+            $this->commentLoggingService->logSpamDetection($comment, $isSpam, $reason);
+        }
 
         return $isSpam;
     }

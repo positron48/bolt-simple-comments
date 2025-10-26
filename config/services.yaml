@@ -19,7 +19,7 @@ services:
     tags: [ 'bolt.extension_backend_menu' ]
 
   Positron48\CommentExtension\Service\CommentLoggingService:
-    arguments: [ '@logger' ]
+    arguments: [ '@Psr\Log\LoggerInterface' ]
 
 ## Add the translatable labels for this extension.
 framework:
