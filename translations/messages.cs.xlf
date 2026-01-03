@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:2.0" version="2.0" srcLang="en" trgLang="cs">
+  <file id="messages.cs">
+    <unit id="sXTA2kP" name="edit comment">
+      <segment>
+        <source>edit comment</source>
+        <target>Upravit komentář</target>
+      </segment>
+    </unit>
+    <unit id="no_comments_yet" name="No comments yet">
+      <segment>
+        <source>No comments yet</source>
+        <target>Zatím žádné komentáře</target>
+      </segment>
+    </unit>
+    <unit id="back_to_list" name="back to list">
+      <segment>
+        <source>back to list</source>
+        <target>Zpět na seznam</target>
+      </segment>
+    </unit>
+    <unit id="update" name="Update">
+      <segment>
+        <source>Update</source>
+        <target>Aktualizovat</target>
+      </segment>
+    </unit>
+    <unit id="comment" name="Comment">
+      <segment>
+        <source>Comment</source>
+        <target>Komentář</target>
+      </segment>
+    </unit>
+    <unit id="edit_comment_title" name="Edit Comment">
+      <segment>
+        <source>Edit Comment</source>
+        <target>Upravit komentář</target>
+      </segment>
+    </unit>
+    <unit id="published" name="published">
+      <segment>
+        <source>published</source>
+        <target>Zveřejněno</target>
+      </segment>
+    </unit>
+    <unit id="save" name="Save">
+      <segment>
+        <source>Save</source>
+        <target>Uložit</target>
+      </segment>
+    </unit>
+    <unit id="invalid_data" name="Invalid data">
+      <segment>
+        <source>Invalid data</source>
+        <target>Neplatná data</target>
+      </segment>
+    </unit>
+    <unit id="delete" name="Delete">
+      <segment>
+        <source>Delete</source>
+        <target>Smazat</target>
+      </segment>
+    </unit>
+    <unit id="confirm_delete" name="Are you sure you want to delete this item?">
+      <segment>
+        <source>Are you sure you want to delete this item?</source>
+        <target>Opravdu chcete tuto položku smazat?</target>
+      </segment>
+    </unit>
+    <unit id="form.author_name" name="Author name">
+      <segment>
+        <source>Author name</source>
+        <target>Jméno autora</target>
+      </segment>
+    </unit>
+    <unit id="form.author_email" name="Author email">
+      <segment>
+        <source>Author email</source>
+        <target>E-mail autora</target>
+      </segment>
+    </unit>
+    <unit id="form.message" name="Message">
+      <segment>
+        <source>Message</source>
+        <target>Zpráva</target>
+      </segment>
+    </unit>
+  </file>
+</xliff>
